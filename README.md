@@ -4,3 +4,6 @@ Wk04_adc_read.py
 ```
 code snippet example
 ```
+
+displaying an image with Markdown syntax: 
+![image description](rscape.png)
