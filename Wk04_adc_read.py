@@ -13,7 +13,7 @@ adc.atten(ADC.ATTN_11DB)
 while True:
     #read the ADC value: 
     analog_val = adc.read ()
-    #print(analog_val)
+    #print(analog_val )
     analog_val_8bit=in(analog_val/16)
     print(analog_val_8bit)
     sleep_ms(100)
