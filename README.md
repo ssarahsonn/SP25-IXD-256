@@ -5,6 +5,9 @@ Wk04_adc_read.py
 code snippet example
 ```
 
+displaying a link with Markdown syntax:
+[link]
+
 displaying an image with Markdown syntax: 
 ![image description](rscape.png)
 
