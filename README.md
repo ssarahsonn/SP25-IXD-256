@@ -7,3 +7,6 @@ code snippet example
 
 displaying an image with Markdown syntax: 
 ![image description](rscape.png)
+
+displaying an image with HTML syntax: 
+<img src = "rscape.png" width=">
