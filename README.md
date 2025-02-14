@@ -9,7 +9,7 @@ displaying a link with Markdown syntax:
 [link](Wk04_adc_read.py)  
 
 displaying a link with HTML syntax:
-<a href= "Wk04_adc_read.py">link to ADC read example>
+<a href= "Wk04_adc_read.py">link to ADC read example</a>
 
 displaying an image with Markdown syntax: 
 ![image description](rscape.png)
