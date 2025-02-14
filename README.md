@@ -2,6 +2,5 @@
 Code repository for IXD-256  
 Wk04_adc_read.py  
 ```
-
 code snippet example
 ```
