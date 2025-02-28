@@ -9,7 +9,7 @@ The protoype operates in three distinct stages:
 2. Raising the lever connects the copper pieces, activating the lights.
 3. After the lights have been on for five seconds, they begin to flash, signaling the start of the performance with the phrase, "Let the show begin!"
 
-#Final code
+#Final code  
 from machine import Pin, ADC
 from time import sleep, sleep_ms, ticks_ms
 from neopixel import NeoPixel
