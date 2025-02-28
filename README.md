@@ -9,6 +9,9 @@ The protoype operates in three distinct stages:
 2. Raising the lever connects the copper pieces, activating the lights.
 3. After the lights have been on for five seconds, they begin to flash, signaling the start of the performance with the phrase, "Let the show begin!"
 
+![Untitled](https://github.com/user-attachments/assets/f3cdcbdb-220b-4ae6-8e28-a98597f2c4f1)
+
+
 #Final code  
 from machine import Pin, ADC
 from time import sleep, sleep_ms, ticks_ms
