@@ -10,7 +10,7 @@ The protoype operates in three distinct stages:
 3. After the lights have been on for five seconds, they begin to flash, signaling the start of the performance with the phrase, "Let the show begin!"
 
 ![Untitled](https://github.com/user-attachments/assets/f3cdcbdb-220b-4ae6-8e28-a98597f2c4f1)
-
+https://drive.google.com/drive/folders/1FORy3Wa_qMkPsP6mlt6uF51kmiBMy9FD
 
 #Final code  
 from machine import Pin, ADC
