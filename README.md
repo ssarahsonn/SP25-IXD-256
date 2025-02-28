@@ -1,18 +1,40 @@
-# SP25-IXD-256
-Code repository for IXD-256  
-Wk04_adc_read.py  
-```
-code snippet example
-```
+# Stage Design
 
-displaying a link with Markdown syntax:
-[link](Wk04_adc_read.py)  
+#Final code
+import os, sys, io
+import M5
+from M5 import *
+#from hardware import RGB
+from hardware import I2C
+from hardware import Pin
+from unit import IMUProUnit
+from time import *
 
-displaying a link with HTML syntax:
-<a href= "Wk04_adc_read.py">link to ADC read example</a>
+# initialize M5 hardware:
+M5.begin()
 
-displaying an image with Markdown syntax: 
-![image description](rscape.png)
+# configure I2C port on pins 1 and 2:
+i2c = I2C(0, scl=Pin(1), sda=Pin(2), freq=100000)
 
-displaying an image with HTML syntax: 
-<img src = "rscape.png" width=">
+# configure IMU on I2C port:
+imu = IMUProUnit(i2c)
+
+while True:
+    # update M5 hardware:
+    M5.update()
+    # read accelerometer values from IMU:
+    imu_val = imu.get_accelerometer()
+    
+    # print all (x, y, z) accelerometer values:
+    print(imu_val)
+    
+    # print the X-axis accelerometer value:
+    #print(imu_val[0])  # value at index 0
+    
+    # print the Y-axis accelerometer value:
+    #print('y =', imu_val[1])  # value at index 1
+    
+    # print the X and Y accelerometer values:
+    #print(imu_val[0], imu_val[1])
+    
+    sleep_ms(100)
