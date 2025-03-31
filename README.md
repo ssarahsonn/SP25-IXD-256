@@ -71,6 +71,171 @@ __Materials Used__
 __Cardboard Prototype__
 For this project, I created a cardboard prototype of a wheelchair for simulation. The cardboard frame allowed for easy attachment of the sensors and the NeoPixel strip, providing a nice demonstration of the detection system in action.
 
+__Code__
+
+import os, sys, io
+import M5
+from M5 import *
+from hardware import I2C
+from hardware import Pin, ADC
+from unit import IMUProUnit
+from time import *
+from neopixel import NeoPixel
+import m5utils
+
+M5.begin()
+
+i2c = I2C(0, scl=Pin(1), sda=Pin(2), freq=100000)
+
+imu = IMUProUnit(i2c)
+
+np = NeoPixel(Pin(7), 30)
+
+adc = ADC(Pin(6))
+
+adc.atten(ADC.ATTN_11DB)
+
+imu_x_last = 0
+imu_y_last = 0
+
+r = 0 
+g = 0  
+b = 0  
+
+STATE_STILL = 0
+STATE_X_MOVEMENT = 1
+STATE_Y_MOVEMENT = 2
+current_state = STATE_STILL
+
+flash_timer = 0
+flash_state = False
+x_flash_speed = 100
+y_flash_speed = 100
+
+state_persist_timer = 0
+x_persist_duration = 3000
+y_persist_duration = 3000
+
+imu_timer = 0
+
+adc_timer = 0
+
+brightness = 100
+
+x_persisting = False
+y_persisting = False
+
+
+for i in range(30):
+    np[i] = (0, 0, 0)
+np.write()
+sleep_ms(1000)
+
+imu_val = imu.get_accelerometer()
+imu_x_last = imu_val[0]
+imu_y_last = imu_val[1]
+print(f"Initial IMU values: X={imu_x_last:.2f}, Y={imu_y_last:.2f}")
+print("System ready - in idle state")
+
+while True:
+    M5.update()
+    
+    if (ticks_ms() > adc_timer + 200):
+        adc_timer = ticks_ms()
+        angle_val = adc.read()
+        brightness = int(m5utils.remap(angle_val, 0, 4095, 0, 100))
+        brightness = max(10, brightness)
+
+    if (ticks_ms() > imu_timer + 100):
+        imu_timer = ticks_ms()
+        
+        imu_val = imu.get_accelerometer()
+        
+        imu_x = imu_val[0]
+        imu_y = imu_val[1]
+        
+        imu_x_protopie = int(m5utils.remap(imu_x, -1.0, 1.0, 0, 300))
+        
+        x_diff = abs(imu_x - imu_x_last)
+        y_diff = imu_y - imu_y_last
+        
+        current_time = ticks_ms()
+        
+        x_movement = x_diff > 0.3
+        
+        y_movement = (imu_y < -0.5) or (imu_y_last >= -0.5 and imu_y < -0.3)
+        
+        if current_state == STATE_STILL:
+            if y_movement:
+                current_state = STATE_Y_MOVEMENT
+                state_persist_timer = current_time
+                y_persisting = True
+                print("fall")
+                
+            elif x_movement:
+                current_state = STATE_X_MOVEMENT
+                state_persist_timer = current_time
+                x_persisting = True
+                print('Left/Right movement detected - WHITE flash started')
+        else:
+            if current_state == STATE_Y_MOVEMENT and y_movement:
+                state_persist_timer = current_time
+                y_persisting = True
+                
+            elif current_state == STATE_X_MOVEMENT and x_movement:
+                state_persist_timer = current_time
+                x_persisting = True
+        
+        if y_persisting and (current_time > state_persist_timer + y_persist_duration):
+            y_persisting = False
+            if not x_persisting:
+                current_state = STATE_STILL
+                print('RED flash stopped - returning to still')
+                
+        if x_persisting and (current_time > state_persist_timer + x_persist_duration):
+            x_persisting = False
+            if not y_persisting:
+                current_state = STATE_STILL
+                print('WHITE flash stopped - returning to still')
+        
+        imu_x_last = imu_x
+        imu_y_last = imu_y
+    
+    current_time = ticks_ms()
+    
+    if current_state == STATE_Y_MOVEMENT:
+        if current_time > flash_timer + y_flash_speed:
+            flash_timer = current_time
+            flash_state = not flash_state
+            
+        if flash_state:
+            r, g, b = 255, 0, 0
+        else:
+            r, g, b = 0, 0, 0
+            
+    elif current_state == STATE_X_MOVEMENT:
+        if current_time > flash_timer + x_flash_speed:
+            flash_timer = current_time
+            flash_state = not flash_state
+            
+        if flash_state:
+            r, g, b = 255, 255, 255
+        else:
+            r, g, b = 0, 0, 0
+            
+    else:
+        r, g, b = 0, 0, 0 
+    
+    red = int(r * brightness/100)
+    green = int(g * brightness/100)
+    blue = int(b * brightness/100)
+    
+    for i in range(30):
+        np[i] = (red, green, blue)
+    np.write()
+    
+    sleep_ms(10)
+
 
 __Code Explanation__
 The code reads values from the IMU accelerometer and processes the data to detect movement. If a Y-axis movement (fall) is detected, the NeoPixel strip flashes red to alert users. 
