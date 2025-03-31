@@ -71,8 +71,6 @@ __Materials Used__
 __Cardboard Prototype__
 For this project, I created a cardboard prototype of a wheelchair for simulation. The cardboard frame allowed for easy attachment of the sensors and the NeoPixel strip, providing a nice demonstration of the detection system in action.
 
-__Flowchart__
-![Untitled](https://github.com/user-attachments/assets/f3cdcbdb-220b-4ae6-8e28-a98597f2c4f1)
 
 __Code Explanation__
 The code reads values from the IMU accelerometer and processes the data to detect movement. If a Y-axis movement (fall) is detected, the NeoPixel strip flashes red to alert users. 
@@ -89,7 +87,7 @@ Key Parts of the code:
 - ProtoPie Communication: Sends fall detection events to ProtoPie to trigger a mobile notification.
 
 
-__Demo Photo and Video__
+__Flowchart and Demo Photo & Video Google Drive Folder__
 [Wheelchair Fall Detection Design Photo & Video](https://drive.google.com/drive/folders/13MLQIS2L24womHG51pSSa6geC00aBi8T?dmr=1&ec=wgc-drive-hero-goto)
 
 
