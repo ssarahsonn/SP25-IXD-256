@@ -1,71 +1,91 @@
-# Stage Design
-The stage design I created is inspired by a unique origami folding technique known as the "accordion" fold, which allows light to shine through the folds and creases of the transparent proscenium. This design creates dynamic, shifting shadows throughout the entire space, casting intricate patterns and adding depth to the entire venue. The light filters through each fold, creating a dramatic effect that engages the audience from every angle.
+__Wheelchair Fall Detection System__
 
-To enhance the interactive experience, I constructed a lever mechanism from cardboard, affixed with copper components, allowing for the prototype to feel as real as though we are controlling the stage lights.
-
-The protoype operates in three distinct stages:
-
-1. When the lever is in the down position, with the copper pieces separated, the lights remain off.
-2. Raising the lever connects the copper pieces, activating the lights.
-3. After the lights have been on for five seconds, they begin to flash, signaling the start of the performance with the phrase, "Let the show begin!"
-
-![Untitled](https://github.com/user-attachments/assets/f3cdcbdb-220b-4ae6-8e28-a98597f2c4f1)
-
-[Stage Design Full Videos](https://drive.google.com/drive/folders/1FORy3Wa_qMkPsP6mlt6uF51kmiBMy9FD)
-
-#Final code  
-from machine import Pin, ADC
-from time import sleep, sleep_ms, ticks_ms
-from neopixel import NeoPixel
+This project is a Wheelchair Fall Detection System that uses an IMU sensor to detect falls or movements in a wheelchair. When the chair is still there is no light while there is an x-axis movement there is a flashing white light for night time. When a fall is detected backwards in y-axis, it activates a flashing red light on a NeoPixel RGB strip to alert others to the emergency. In addition to the hardware response, a companion mobile app designed in Figma is used to display a notification popup on the phone when a fall is detected.
+The system consists of an Atom board, an IMU sensor, and an RGB NeoPixel strip for physical feedback, and a ProtoPie app that connects to the hardware and shows real-time notifications on a smartphone.
 
 
-touch_pin = Pin(1, Pin.IN, Pin.PULL_UP)  
+# How it Works
+The **IMUProUnit sensor** detects the motion and tilt of the wheelchair. By measuring the acceleration in the X and Y axes, the system can determine if the user has fallen or if there are unexpected movements.
 
-np = NeoPixel(Pin(35), 1)
+## State Transitions:
 
-np7 = NeoPixel(Pin(7), 30)
+- **STILL**: The system stays in this state when no movement is detected.
+- **X-MOVEMENT**: This state is triggered by horizontal movement (left/right).
+- **Y-MOVEMENT**: This state is triggered by vertical movement, which indicates a potential fall.
 
-copper_separated = False
-separation_time = 0
-flash_state = False
+## The NeoPixel RGB Strip provides a visual indication:
 
-def set_all_leds(color):
-    np[0] = color
-    np.write()
-    
-    for i in range(30):
-        np7[i] = color
-    np7.write()
+- **Red Flashing**: Indicates a fall has been detected. (y-movement)
+- **White Flashing**: Indicates left/right movement detected. (x-axis)
 
-set_all_leds((0, 0, 0))
+## Mobile App Notification (ProtoPie):
 
-while True:
-    current_state = touch_pin.value()
-    
-    if current_state == 1:
-        if not copper_separated:
-            copper_separated = True
-            separation_time = ticks_ms()
-            set_all_leds((255, 255, 255))
-            
-        time_elapsed = ticks_ms() - separation_time
-        
-        if time_elapsed > 5000:
-            if time_elapsed % 1000 < 500:
-                if not flash_state:
-                    set_all_leds((255, 255, 255))  # White
-                    flash_state = True
-            else:
-                if flash_state:
-                    set_all_leds((0, 0, 0))  # Off
-                    flash_state = False
-    
-    else:
-        if copper_separated:
-            copper_separated = False
-            # Turn off all LEDs
-            set_all_leds((0, 0, 0))
-            flash_state = False
-    
-    sleep_ms(10)
- 
+### Figma Design:
+The home screen design was created using **Figma** to simulate a simple notification system when a fall is detected.
+
+### ProtoPie Integration:
+Using **ProtoPie**, the home screen design was connected with the hardware so that when a fall occurs, the mobile app shows a notification popup on the screen.
+
+
+__Mobile App (ProtoPie + Figma)__
+### Figma Design:
+
+The homescreen design for the mobile app was created in **Figma**. The design includes a simple home screen layout and a notification that will appear when a fall is detected.
+
+The notification includes the message: "**Fall Detected! Please check immediately.**"
+
+### ProtoPie App Integration:
+
+The **Figma** design was imported into **ProtoPie**, where I set up an interaction to simulate the fall notification in real-time.
+
+When the **Atom board** detects a fall, it triggers a notification in **ProtoPie**, showing the notification popup on the phone screen.
+
+
+
+__Materials Used__
+* Atom board (Microcontroller)
+
+
+* IMUProUnit (Motion Sensor)
+
+
+* NeoPixel RGB Strip (30 LEDs)
+
+
+* ADC Light Sensor
+
+
+* Wires and Connectors for connecting components
+
+
+* Cardboard: Used for creating a physical wheelchair prototype to test the fall detection system.
+
+
+* Figma: Used for designing the mobile app's home screen and notification popup.
+
+
+* ProtoPie: Used to integrate the mobile app with the hardware for real-time interaction.
+
+
+
+__Cardboard Prototype__
+For this project, I created a cardboard prototype of a wheelchair for simulation. The cardboard frame allowed for easy attachment of the sensors and the NeoPixel strip, providing a nice demonstration of the detection system in action.
+
+
+__Code Explanation__
+The code reads values from the IMU accelerometer and processes the data to detect movement. If a Y-axis movement (fall) is detected, the NeoPixel strip flashes red to alert users. 
+Key Parts of the code:
+- Movement Detection: Detects significant movement in the X and Y directions.
+
+
+- State Management: Handles transitions between states (still, movement in X or Y).
+
+
+- LED Flashing: Controls the flashing of the NeoPixel strip for fall detection.
+
+
+- ProtoPie Communication: Sends fall detection events to ProtoPie to trigger a mobile notification.
+
+
+__Flowchart and Demo Photo & Video Google Drive Folder__
+[Wheelchair Fall Detection Design Photo & Video](https://drive.google.com/drive/folders/13MLQIS2L24womHG51pSSa6geC00aBi8T?dmr=1&ec=wgc-drive-hero-goto)
