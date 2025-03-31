@@ -87,5 +87,5 @@ Key Parts of the code:
 - ProtoPie Communication: Sends fall detection events to ProtoPie to trigger a mobile notification.
 
 
-__Flowchart and Demo Photo & Video Google Drive Folder__
-[Wheelchair Fall Detection Design Photo & Video](https://drive.google.com/drive/folders/13MLQIS2L24womHG51pSSa6geC00aBi8T?dmr=1&ec=wgc-drive-hero-goto)
+
+[Flowchart and Demo Photo & Video Google Drive Folder](https://drive.google.com/drive/folders/13MLQIS2L24womHG51pSSa6geC00aBi8T?dmr=1&ec=wgc-drive-hero-goto)
