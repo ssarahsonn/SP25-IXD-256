@@ -1,10 +1,10 @@
-__Wheelchair Fall Detection System__
+# Wheelchair Fall Detection System
 
 This project is a Wheelchair Fall Detection System that uses an IMU sensor to detect falls or movements in a wheelchair. When the chair is still there is no light while there is an x-axis movement there is a flashing white light for night time. When a fall is detected backwards in y-axis, it activates a flashing red light on a NeoPixel RGB strip to alert others to the emergency. In addition to the hardware response, a companion mobile app designed in Figma is used to display a notification popup on the phone when a fall is detected.
 The system consists of an Atom board, an IMU sensor, and an RGB NeoPixel strip for physical feedback, and a ProtoPie app that connects to the hardware and shows real-time notifications on a smartphone.
 
 
-# How it Works
+__How it Works__ 
 The **IMUProUnit sensor** detects the motion and tilt of the wheelchair. By measuring the acceleration in the X and Y axes, the system can determine if the user has fallen or if there are unexpected movements.
 
 ## State Transitions:
