@@ -7,7 +7,7 @@ The system consists of an Atom board, an IMU sensor, and an RGB NeoPixel strip f
 __How it Works__ 
 The **IMUProUnit sensor** detects the motion and tilt of the wheelchair. By measuring the acceleration in the X and Y axes, the system can determine if the user has fallen or if there are unexpected movements.
 
-## State Transitions:
+__State Transitions:__
 
 - **STILL**: The system stays in this state when no movement is detected.
 - **X-MOVEMENT**: This state is triggered by horizontal movement (left/right).
