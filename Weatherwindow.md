@@ -28,7 +28,7 @@ Figma: For data visualization assets (temperature, icons) used in the prototype.
 
 ProtoPie: For integrating p5.js visuals and Figma assets into a single interactive prototype, allowing for real-time updates and media mixing.
 
-Below are code snippets for the weather animations:
+Below are p5.js code for the weather animations:
 
 
 **Sunny**
