@@ -1,18 +1,18 @@
-Weather Window
-Introduction
+#Weather Window 
+##Introduction
 Weather Window is an interactive physical prototype that brings real-time weather information into your daily environment in a way that’s both functional and ambient. Instead of displaying simple numbers or icons, the Weather Window uses light, movement, and tactile controls to create an intuitive, sensory experience of the weather—right inside your home or office. Designed for those who want to spend less time checking their phones, it offers a calming, glanceable alternative to digital screens.
 
-Context & Use Case
+##Context & Use Case
 Weather Window is intended for use in personal or shared indoor spaces—like bedrooms, living rooms, kitchens, or offices—where people often begin their day. The device provides a quick, ambient weather update as soon as someone approaches, eliminating the need to pick up a phone or ask a smart speaker. Beyond basic utility, it gently transforms the atmosphere of the room to reflect the current weather, creating a seamless transition between indoor and outdoor worlds.
 
-Intended Audience
+##Intended Audience
 This project is ideal for anyone who finds themselves habitually reaching for their phone for simple updates like the weather. Whether you’re looking to develop healthier digital habits or simply want to start your day in a more mindful way, Weather Window offers a more intentional, ambient approach to checking the weather.
 
-Implementation
+##Implementation
 Enclosure & Mechanical Design
 The physical “window” is made from several acrylic panels, each hand-sandblasted to create a frosted effect. The panels are precisely glued together for a seamless, sturdy finish. At the top edge, a slot holds an RGB LED strip, which creates the ambient lighting effects that visually represent the current weather conditions.
 
-Hardware (Electronics)
+##Hardware (Electronics)
 RGB LED strip: Provides dynamic, color-based feedback for weather states.
 
 Proximity (IR) sensor: Detects when someone approaches, automatically activating the display and lighting.
@@ -21,7 +21,7 @@ Angle unit (potentiometer): Allows users to cycle through weather forecasts (tod
 
 All components are integrated along the edge of the window for easy interaction.
 
-Software & Visuals
+##Software & Visuals
 p5.js: Used to create dynamic weather animations—foggy, rainy, sunny, and snowy—which are projected onto the frosted panel.
 
 Figma: For data visualization assets (temperature, icons) used in the prototype.
@@ -258,7 +258,8 @@ function clearLayers() {
     pg.clear();
   }
 }
-Firmware (MicroPython)
+
+##Firmware (MicroPython)
 The microcontroller is programmed using MicroPython (via Thonny).
 Key responsibilities include:
 
@@ -270,16 +271,16 @@ Sending signals to ProtoPie to trigger specific screen changes and animations.
 
 To connect the system, run the MicroPython code on Thonny, make sure ProtoPie Connect is set up for Arduino at the highest baud rate and correct port, and confirm the local ProtoPie interface is “running.”
 
-Integration
+##Integration
 Thonny is used to upload and run the firmware. ProtoPie’s integration features allow real-time linkage between the hardware (sensors, LEDs) and digital weather visuals, ensuring that user actions (like turning the angle unit or approaching the sensor) immediately update both the lighting and the on-screen projection.
 
-State Diagram
+##State Diagram
 (Refer to Google Drive Link at bottom of file)
 
-Conclusion
+##Conclusion
 One challenge during development was integrating the angle unit and proximity sensor into the enclosure in a clean and user-friendly way. Limited by time and resources, I used double-sided tape to attach these components, which worked but felt like a temporary solution. In future iterations, I would prioritize designing dedicated mounts—using 3D printing or precisely cut acrylic slots—for a more seamless, intuitive, and visually integrated experience. This project highlighted for me the importance of considering both technical and physical design details from the very start.
 
-Flowchart and Demo Photo & Video
+##Flowchart and Demo Photo & Video
 
 [Flowchart and Demo Photo & Video Google Drive Folder](https://drive.google.com/drive/folders/1FhZ_Sk9sxA3VqXrq39SCMkuBqH7y_fE5)
 
