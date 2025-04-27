@@ -294,7 +294,7 @@ To connect the system, run the MicroPython code on Thonny, make sure ProtoPie Co
 Thonny is used to upload and run the firmware. ProtoPie’s integration features allow real-time linkage between the hardware (sensors, LEDs) and digital weather visuals, ensuring that user actions (like turning the angle unit or approaching the sensor) immediately update both the lighting and the on-screen projection.
 
 State Diagram
-(Include your flowchart/state diagram image here, labeling which steps are handled by firmware (ATOM board) and which by computer software (ProtoPie, p5.js).)
+(Refer to Google Drive Link at bottom of file)
 
 Conclusion
 One challenge during development was integrating the angle unit and proximity sensor into the enclosure in a clean and user-friendly way. Limited by time and resources, I used double-sided tape to attach these components, which worked but felt like a temporary solution. In future iterations, I would prioritize designing dedicated mounts—using 3D printing or precisely cut acrylic slots—for a more seamless, intuitive, and visually integrated experience. This project highlighted for me the importance of considering both technical and physical design details from the very start.
